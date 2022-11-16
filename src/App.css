@@ -1,0 +1,256 @@
+.App {
+  width: 100vw;
+  height: 100vh;
+
+  background: #1a1a1a;
+}
+
+.mainscreen {
+  height: 90%;
+  left: 0;
+  top: 0;
+  position: absolute;
+  width: 75%;
+
+  background: #1a1a1a;
+}
+.form-control {
+  background-color: #3f434a;
+  border: 2px solid #2c2f34;
+  color: white;
+  line-height: 35px;
+}
+.form-control:focus {
+  background-color: #3f434a;
+  border: 2px solid #2c2f34;
+  color: white;
+
+  box-shadow: #2c2f34 2px 5px 6px;
+}
+
+.card-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: #c985df;
+}
+.homescreen {
+  height: 100%;
+  width: 100%;
+}
+.formname {
+  border-radius: 30px;
+  background-color: #262625;
+  padding: 30px;
+  height: 50%;
+  width: 50%;
+}
+.title {
+  color: #eee;
+  font-family: sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  margin-top: 30px;
+  text-align: center;
+}
+
+.title2 {
+  color: #eee;
+  font-family: sans-serif;
+  font-size: 28px;
+  text-align: center;
+  font-weight: 600;
+  margin-top: 30px;
+}
+.subtitle2 {
+  color: #eee;
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.subtitle {
+  color: #eee;
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.placeholdertext {
+  font-family: sans-serif;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  line-height: 30px;
+
+  /* background: #3f434a;
+  */
+}
+
+.chatscreen {
+  height: 100%;
+  right: 0;
+  position: absolute;
+  width: 25%;
+}
+.sendbar {
+  width: 100%;
+  height: 80%;
+}
+.sendmessage {
+  width: 100%;
+  height: 10%;
+  left: 0;
+  bottom: 0;
+  position: absolute;
+  background: #262625;
+}
+.chatbar {
+  width: 100%;
+  height: 90%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  background: #262625;
+  overflow-y: scroll;
+}
+
+.cardchat {
+  border: 0;
+  height: auto;
+  /* overflow-y:auto; */
+  background: #262625;
+  /* background: #52a214; */
+}
+
+.controlscreen {
+  height: 10%;
+  left: 0;
+  bottom: 0;
+  position: absolute;
+  width: 75%;
+
+  background: #1a1a1a;
+}
+
+.video {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  object-fit: fill;
+  background: black;
+  border-radius: 20px;
+  transform: scaleX(-1);
+  /* border-radius: 50%; */
+}
+
+.card1 {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  margin-top: 10px;
+  border-radius: 20px;
+  /* background: #3c4043; */
+}
+.card2 {
+  width: auto;
+  min-width: 30%;
+  max-width: 80%;
+  height: auto;
+  padding: 0;
+  margin-top: 5px;
+  border-radius: 15px;
+  background: #3f4042;
+  color: white;
+}
+
+.card-body {
+  padding: 7px;
+}
+
+.row {
+  width: 100%;
+  height: 100%;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.rowmessage {
+  display: flex;
+
+  width: auto;
+  height: auto;
+  margin-bottom: 8px;
+}
+.col {
+  margin-bottom: 2%;
+}
+
+.name {
+  color: white;
+  /* font-size: 18px; */
+  font-weight: bold;
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+}
+
+.mute {
+  color: white;
+
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+.btncontrol {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.button {
+  margin-right: 15px;
+  width: 20%;
+  /* min-width:  auto; */
+}
+
+.avatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  font-size: 150px;
+  font-family: roboto, arial;
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.avatarpos {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sendmess {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.placeholdertext2 {
+  height: 65%;
+}
