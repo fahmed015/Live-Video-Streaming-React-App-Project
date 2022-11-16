@@ -61,6 +61,7 @@ function Chat(props) {
 
   useEffect(() => {
     if (user && time) {
+      console.log(time);
       const messtime = query(
         messagesRef,
         orderByChild("timestamp"),
@@ -68,6 +69,7 @@ function Chat(props) {
       );
 
       onChildAdded(messtime, (data) => {
+        console.log(data.key);
         props.addchat({
           [data.key]: {
             text: data.val().text,

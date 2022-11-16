@@ -55,7 +55,7 @@ export const userReducer = (state = intialstate, action) => {
     }
     case SET_TIME: {
       state.time = action.payload.timeenter;
-
+      console.log(state);
       return state;
     }
 
