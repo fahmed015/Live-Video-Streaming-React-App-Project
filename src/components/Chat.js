@@ -107,7 +107,7 @@ function Chat(props) {
           <Form
             onSubmit={handleOnSubmit}
             className="sendmess"
-            autocomplete="off"
+            autoComplete="off"
           >
             <InputGroup>
               <Form.Control
