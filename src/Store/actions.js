@@ -1,11 +1,11 @@
 import {
-  //SET_MAIN_STREAM,
   ADD_MEMBER,
   ADD_CHAT,
   SET_USER,
   SET_TIME,
   SET_NAME,
   REMOVE_MEMBER,
+  RESET,
   UPDATE_USER,
   UPDATE_MEMBER,
   SET_MAIN_STREAM,
@@ -59,6 +59,11 @@ export const addchat = (chat) => {
     payload: {
       messnew: chat,
     },
+  };
+};
+export const reset = () => {
+  return {
+    type: RESET,
   };
 };
 

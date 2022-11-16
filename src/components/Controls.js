@@ -3,7 +3,12 @@ import Button from "react-bootstrap/Button";
 import React, { useState } from "react";
 
 import { connect } from "react-redux";
-import { updatemember, updateUser, setMainStream } from "../Store/actions";
+import {
+  updatemember,
+  updateUser,
+  setMainStream,
+  reset,
+} from "../Store/actions";
 import Container from "react-bootstrap/Container";
 import { updatepref, removeuser } from "../FirebaseServer/firebase";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +34,7 @@ function Controls(props) {
   function End() {
     const userid = Object.keys(props.currentUser)[0];
     removeuser(userid);
-
+    props.reset();
     props.stream.getTracks().forEach((track) => track.stop());
 
     navigate("/");
@@ -92,7 +97,6 @@ function Controls(props) {
 
       updatepref(userid, { video: !vidnew });
       props.updateUser(payload);
-      //  props.updatemember(payload);
       setControlState((previousState) => {
         return { ...previousState, video: !vidnew };
       });
@@ -100,7 +104,6 @@ function Controls(props) {
   }
 
   return (
-    // variant={!controlState.audio ? "danger" :"secondary"}
     <Container fluid className="controlscreen">
       <Row>
         <div className="btncontrol">
@@ -145,6 +148,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setMainStream: (stream) => dispatch(setMainStream(stream)),
     updateUser: (user) => dispatch(updateUser(user)),
+    reset: () => dispatch(reset()),
     updatemember: (user) => dispatch(updatemember(user)),
   };
 };

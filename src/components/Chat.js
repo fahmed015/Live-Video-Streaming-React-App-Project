@@ -104,14 +104,18 @@ function Chat(props) {
 
       <Container fluid className="sendmessage">
         <Row>
-          <Form onSubmit={handleOnSubmit} className="sendmess">
+          <Form
+            onSubmit={handleOnSubmit}
+            className="sendmess"
+            autocomplete="off"
+          >
             <InputGroup>
               <Form.Control
-                value={NewMessage.text}
                 type="text"
                 name="text"
                 placeholder="Type your message here..."
                 onChange={handleOnChange}
+                value={NewMessage.text}
               />
             </InputGroup>
           </Form>

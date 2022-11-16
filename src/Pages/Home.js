@@ -10,7 +10,7 @@ function Home(props) {
   const navigate = useNavigate();
 
   function removeSpace(str) {
-    str = str.replace(/\s/g, "");
+    str = str.replace(/^\s+|\s+$/gm, "");
     return str;
   }
 
@@ -21,6 +21,7 @@ function Home(props) {
       setName("");
     } else {
       const check = removeSpace(Name);
+
       props.setName(check);
       navigate("/Meet");
     }

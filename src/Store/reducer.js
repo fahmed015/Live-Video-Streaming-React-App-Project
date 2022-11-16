@@ -8,6 +8,7 @@ import {
   ADD_CHAT,
   SET_NAME,
   SET_TIME,
+  RESET,
 } from "./actiontypes";
 
 import { createOffer, Listensers } from "../FirebaseServer/firebase";
@@ -48,6 +49,15 @@ let intialstate = {
 
 export const userReducer = (state = intialstate, action) => {
   switch (action.type) {
+    case RESET: {
+      state.chat = {};
+      state.time = null;
+      state.currentUser = null;
+      state.name = null;
+
+      return state;
+    }
+
     case SET_NAME: {
       state.name = action.payload.nameset;
 
@@ -55,7 +65,7 @@ export const userReducer = (state = intialstate, action) => {
     }
     case SET_TIME: {
       state.time = action.payload.timeenter;
-      console.log(state);
+
       return state;
     }
 
@@ -68,6 +78,7 @@ export const userReducer = (state = intialstate, action) => {
     case SET_USER: {
       state = { ...state, currentUser: { ...action.payload.currentUser } };
       const userid = Object.keys(state.currentUser)[0];
+
       Listensers(userid);
 
       return state;
@@ -99,25 +110,26 @@ export const userReducer = (state = intialstate, action) => {
     }
 
     case ADD_MEMBER: {
-      const userid = Object.keys(state.currentUser)[0];
-      const memberid = Object.keys(action.payload.newUser)[0];
+      if (state.currentUser) {
+        const userid = Object.keys(state.currentUser)[0];
+        const memberid = Object.keys(action.payload.newUser)[0];
 
-      action.payload.newUser[memberid].avatarColor = generateLightColorHex();
-      if (userid === memberid) {
-        action.payload.newUser[memberid].currentUser = true;
-      } else {
-        if (state.mainStream) {
-          action.payload.newUser = addConnection(
-            state.currentUser,
-            action.payload.newUser,
-            state.mainStream
-          );
+        action.payload.newUser[memberid].avatarColor = generateLightColorHex();
+        if (userid === memberid) {
+          action.payload.newUser[memberid].currentUser = true;
+        } else {
+          if (state.mainStream) {
+            action.payload.newUser = addConnection(
+              state.currentUser,
+              action.payload.newUser,
+              state.mainStream
+            );
+          }
         }
+
+        let members = { ...state.members, ...action.payload.newUser };
+        state = { ...state, members };
       }
-
-      let members = { ...state.members, ...action.payload.newUser };
-      state = { ...state, members };
-
       return state;
     }
 

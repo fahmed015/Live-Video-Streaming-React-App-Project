@@ -19,6 +19,7 @@ import {
   updatemember,
   setMainStream,
   setTime,
+  reset,
 } from "../Store/actions";
 import "../App.css";
 import Members from "../components/Members";
@@ -34,18 +35,19 @@ function MeetingRoom(props) {
     if (event) {
       const userid = Object.keys(props.User)[0];
       removeuser(userid);
+      props.reset();
       props.Mainstream.getTracks().forEach((track) => track.stop());
     }
   };
 
-  window.onbeforeunload = (event) => {
-    const e = event || window.event;
-    e.preventDefault();
-    // if (e) {
-    //   e.returnValue = ''; // Legacy method for cross browser support
-    // }
-    // return ''; // Legacy method for cross browser support
-  };
+  // window.onbeforeunload = (event) => {
+  //   const e = event || window.event;
+  //   e.preventDefault();
+  //   // if (e) {
+  //   //   e.returnValue = ''; // Legacy method for cross browser support
+  //   // }
+  //   // return ''; // Legacy method for cross browser support
+  // };
 
   useEffect(() => {
     navigator.mediaDevices
@@ -149,6 +151,7 @@ const mapDispatchToProps = (dispatch) => {
     addMember: (user) => dispatch(addmember(user)),
     setUser: (user) => dispatch(setUser(user)),
     setTime: (time) => dispatch(setTime(time)),
+    reset: () => dispatch(reset()),
     removeMember: (userId) => dispatch(removemember(userId)),
     updatemember: (user) => dispatch(updatemember(user)),
   };
