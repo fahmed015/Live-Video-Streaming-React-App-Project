@@ -49,7 +49,7 @@ function MeetingRoom(props) {
 
   useEffect(() => {
     navigator.mediaDevices
-      .getUserMedia({ audio: { echoCancellation: true }, video: true })
+      .getUserMedia({ audio: true, video: true })
       .then((mediastream) => {
         mediastream.getVideoTracks()[0].enabled = false;
 

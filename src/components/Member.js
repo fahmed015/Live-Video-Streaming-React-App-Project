@@ -18,6 +18,7 @@ function Member(props) {
   useEffect(() => {
     if (info.currentUser && mainstream) {
       vidref.current.srcObject = mainstream;
+      vidref.current.muted = true;
     }
   }, [info.currentUser, mainstream]);
 
