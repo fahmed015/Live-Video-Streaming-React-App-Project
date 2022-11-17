@@ -23,7 +23,7 @@ function Members() {
 
   return (
     <Container fluid className="mainscreen">
-      <Row md={sizerow} className="justify-content-md-center ">
+      <Row md={sizerow} xs={1}>
         {memberskey.map((elem, index) => {
           const infomember = members[elem];
 

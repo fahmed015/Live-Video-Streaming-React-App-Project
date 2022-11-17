@@ -61,7 +61,6 @@ function Chat(props) {
 
   useEffect(() => {
     if (user && time) {
-      console.log(time);
       const messtime = query(
         messagesRef,
         orderByChild("timestamp"),
@@ -113,7 +112,7 @@ function Chat(props) {
               <Form.Control
                 type="text"
                 name="text"
-                placeholder="Type your message here..."
+                placeholder="Type your message here"
                 onChange={handleOnChange}
                 value={NewMessage.text}
               />

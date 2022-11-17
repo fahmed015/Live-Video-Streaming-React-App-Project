@@ -132,6 +132,9 @@ function MeetingRoom(props) {
       <Controls></Controls>
 
       <Chat></Chat>
+
+      {/* <h1> Members</h1>
+      {JSON.stringify(props.Members)} */}
     </div>
   );
 }

@@ -65,8 +65,6 @@ function Controls(props) {
         audio: !audionew,
       });
       props.updateUser(payload);
-      // props.updatemember(payload);
-
       setControlState((previousState) => {
         return { ...previousState, audio: !audionew };
       });
@@ -87,6 +85,27 @@ function Controls(props) {
       };
 
       props.stream.getVideoTracks()[0].enabled = !vidnew;
+      const videocheck = !vidnew;
+      // if (videocheck) {
+      //   navigator.mediaDevices
+      //     .getUserMedia({ video: true })
+      //     .then((mediastream) => {
+      //       mediastream.getTracks().forEach((track) => {
+      //         props.stream.addTrack(track);
+      //       });
+      //     });
+
+      //   ///props.stream.getVideoTracks()[0].enabled = !vidnew;
+
+      //   // props.stream.getTracks().forEach((track) => {
+
+      //   // });
+      // } else {
+      //   props.stream.getTracks().forEach((track) => {
+      //     track.stop();
+      //     props.stream.removeTrack(track);
+      //   });
+      // }
 
       const payload = {
         [userid]: {

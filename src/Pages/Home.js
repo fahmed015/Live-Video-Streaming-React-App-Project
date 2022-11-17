@@ -17,7 +17,7 @@ function Home(props) {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     if (/^ *$/.test(Name)) {
-      setErorr("Name cannot be empty , please enter your name !");
+      setErorr("Please enter your name");
       setName("");
     } else {
       const check = removeSpace(Name);

@@ -54,6 +54,7 @@ export const userReducer = (state = intialstate, action) => {
       state.time = null;
       state.currentUser = null;
       state.name = null;
+      state.mainStream = null;
 
       return state;
     }
@@ -71,7 +72,8 @@ export const userReducer = (state = intialstate, action) => {
 
     case SET_MAIN_STREAM: {
       state = { ...state, ...action.payload };
-
+      console.log("Mediastream");
+      console.log(state);
       return state;
     }
 
