@@ -89,7 +89,7 @@ function Chat(props) {
       <Container fluid className="chatbar">
         <Card className="cardchat">
           <div className="title2"> 💬 Chat </div>
-          <div className="subtitle2">Welcome to the room {name}</div>
+          <div className="subtitle2">Welcome to the room {name} </div>
 
           {Messageskey.map((id) => {
             const infomember = Messages[id];

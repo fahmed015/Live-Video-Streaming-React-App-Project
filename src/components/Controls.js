@@ -1,5 +1,7 @@
 import Button from "react-bootstrap/Button";
+
 import React, { useState } from "react";
+
 import { connect } from "react-redux";
 import {
   updatemember,
@@ -33,8 +35,8 @@ function Controls(props) {
     removeuser(userid);
     props.reset();
     props.stream.getTracks().forEach((track) => track.stop());
-
-    navigate("/");
+    window.location.reload();
+    // navigate("/");
   }
 
   function Mute() {

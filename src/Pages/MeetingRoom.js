@@ -37,6 +37,7 @@ function MeetingRoom(props) {
       removeuser(userid);
       props.reset();
       props.Mainstream.getTracks().forEach((track) => track.stop());
+      window.location.reload();
     }
   };
 
