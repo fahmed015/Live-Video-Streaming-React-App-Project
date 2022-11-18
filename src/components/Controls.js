@@ -1,7 +1,5 @@
 import Button from "react-bootstrap/Button";
-
 import React, { useState } from "react";
-
 import { connect } from "react-redux";
 import {
   updatemember,
@@ -10,7 +8,7 @@ import {
   reset,
 } from "../Store/actions";
 import Container from "react-bootstrap/Container";
-import { updatepref, removeuser } from "../FirebaseServer/firebase";
+import { updatepref, removeuser } from "../Server/firebase";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -26,7 +24,6 @@ function Controls(props) {
   const [controlState, setControlState] = useState({
     audio: true,
     video: false,
-    screen: false,
   });
 
   const navigate = useNavigate();
@@ -48,7 +45,7 @@ function Controls(props) {
       const userName = props.currentUser[userid].userName;
       const defaultPreference = {
         audio: !audionew,
-        screen: props.currentUser[userid].defaultPreference.screen,
+
         video: props.currentUser[userid].defaultPreference.video,
       };
 
@@ -80,32 +77,11 @@ function Controls(props) {
 
       const defaultPreference = {
         audio: props.currentUser[userid].defaultPreference.audio,
-        screen: props.currentUser[userid].defaultPreference.screen,
+
         video: !vidnew,
       };
 
       props.stream.getVideoTracks()[0].enabled = !vidnew;
-      const videocheck = !vidnew;
-      // if (videocheck) {
-      //   navigator.mediaDevices
-      //     .getUserMedia({ video: true })
-      //     .then((mediastream) => {
-      //       mediastream.getTracks().forEach((track) => {
-      //         props.stream.addTrack(track);
-      //       });
-      //     });
-
-      //   ///props.stream.getVideoTracks()[0].enabled = !vidnew;
-
-      //   // props.stream.getTracks().forEach((track) => {
-
-      //   // });
-      // } else {
-      //   props.stream.getTracks().forEach((track) => {
-      //     track.stop();
-      //     props.stream.removeTrack(track);
-      //   });
-      // }
 
       const payload = {
         [userid]: {

@@ -16,7 +16,7 @@ import dbref, {
   query,
   startAfter,
   orderByChild,
-} from "../FirebaseServer/firebase";
+} from "../Server/firebase";
 
 function Chat(props) {
   const messagesRef = child(dbref, "chat");
@@ -68,7 +68,6 @@ function Chat(props) {
       );
 
       onChildAdded(messtime, (data) => {
-        console.log(data.key);
         props.addchat({
           [data.key]: {
             text: data.val().text,
@@ -90,7 +89,7 @@ function Chat(props) {
       <Container fluid className="chatbar">
         <Card className="cardchat">
           <div className="title2"> 💬 Chat </div>
-          <div className="subtitle2">Welcome to the room {name} !</div>
+          <div className="subtitle2">Welcome to the room {name}</div>
 
           {Messageskey.map((id) => {
             const infomember = Messages[id];

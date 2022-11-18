@@ -1,77 +1,39 @@
-import { initializeApp } from "firebase/app";
-import {
-  getDatabase,
-  ref,
-  serverTimestamp,
-  get,
-  set,
-  onChildAdded,
-  push,
-  startAfter,
-  endAt,
-  orderByKey,
-  orderByValue,
-  orderByChild,
-  child,
-  onValue,
-  onDisconnect,
-  onChildRemoved,
-  update,
-  onChildChanged,
-  query,
-  remove,
-} from "firebase/database";
 import { store } from "..";
+import dbref, { onChildAdded, push, child } from "./firebase";
 
-const firebaseConfig = {
-  apikey: "AIzaSyCxnTzMYHpTGiwPfnsDSQ7vAa7YiyXIWOw",
-  databaseURL: "https://video-streaming-791fd-default-rtdb.firebaseio.com/",
-};
-
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-
-var dbref = ref(database);
-
-const connectref = ref(database, ".info/connected");
 const membersref = child(dbref, "members");
 
-let currentDate = new Date();
-currentDate.setDate(currentDate.getDate() - 1);
-
-const date = new Date(currentDate);
-const timestamp = date.getTime();
-
-const messagesRef = child(dbref, "chat");
-const chatdatabase = query(
-  messagesRef,
-  orderByChild("timestamp"),
-  endAt(timestamp)
-);
-
-onChildAdded(chatdatabase, (data) => {
-  const mesref = child(messagesRef, data.key);
-  remove(mesref);
-});
-
-onValue(connectref, (snap) => {
-  if (snap.val() === true) {
-    console.log("connected");
-  } else {
-    console.log("not connected");
-  }
-});
-
-export const removeuser = (userid) => {
-  const userref = child(membersref, userid);
-  remove(userref);
+const servers = {
+  iceServers: [
+    {
+      urls: [
+        "stun:stun1.l.google.com:19302",
+        "stun:stun2.l.google.com:19302",
+        "stun:stun.l.google.com:19302",
+        "stun:stun3.l.google.com:19302",
+        "stun:stun4.l.google.com:19302",
+      ],
+    },
+  ],
+  iceCandidatePoolSize: 10,
 };
 
-export const updatepref = (userid, updates) => {
-  const userref = child(membersref, userid);
-  const prefref = child(userref, "defaultPreference");
+export const addConnection = (currentuser, newuser, mediastream) => {
+  const peerconnection = new RTCPeerConnection(servers);
 
-  update(prefref, updates);
+  mediastream.getTracks().forEach((track) => {
+    peerconnection.addTrack(track, mediastream);
+  });
+
+  const userid = Object.keys(currentuser)[0];
+  const memberid = Object.keys(newuser)[0];
+
+  const offerIds = [memberid, userid].sort((a, b) => a.localeCompare(b));
+  newuser[memberid].peerConnection = peerconnection;
+
+  if (offerIds[0] !== userid)
+    createOffer(peerconnection, offerIds[0], offerIds[1]);
+  return newuser;
 };
 
 export const createOffer = async (peerConnection, receiverId, createdID) => {
@@ -99,10 +61,10 @@ export const createOffer = async (peerConnection, receiverId, createdID) => {
   push(offerref, { offerpayload });
 };
 
-const createAnswer = async (otherUserId, userId) => {
-  const pc = store.getState().members[otherUserId].peerConnection;
+const createAnswer = async (offerUserId, userId) => {
+  const pc = store.getState().members[offerUserId].peerConnection;
 
-  const recieverref = child(membersref, otherUserId);
+  const recieverref = child(membersref, offerUserId);
 
   pc.onicecandidate = (event) => {
     event.candidate &&
@@ -179,25 +141,3 @@ export const Listensers = async (userId) => {
     }
   });
 };
-
-export {
-  onValue,
-  child,
-  set,
-  get,
-  serverTimestamp,
-  ref,
-  onChildAdded,
-  orderByKey,
-  push,
-  endAt,
-  startAfter,
-  orderByValue,
-  connectref,
-  onDisconnect,
-  onChildRemoved,
-  onChildChanged,
-  query,
-  orderByChild,
-};
-export default dbref;

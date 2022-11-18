@@ -8,7 +8,7 @@ import dbref, {
   onDisconnect,
   onChildRemoved,
   onChildChanged,
-} from "../FirebaseServer/firebase";
+} from "../Server/firebase";
 import { useEffect } from "react";
 import { connect } from "react-redux";
 
@@ -40,21 +40,11 @@ function MeetingRoom(props) {
     }
   };
 
-  // window.onbeforeunload = (event) => {
-  //   const e = event || window.event;
-  //   e.preventDefault();
-  //   // if (e) {
-  //   //   e.returnValue = ''; // Legacy method for cross browser support
-  //   // }
-  //   // return ''; // Legacy method for cross browser support
-  // };
-
   useEffect(() => {
     navigator.mediaDevices
       .getUserMedia({ audio: true, video: true })
       .then((mediastream) => {
         mediastream.getVideoTracks()[0].enabled = false;
-
         props.setMainStream(mediastream);
       });
 
@@ -64,7 +54,6 @@ function MeetingRoom(props) {
       if (data) {
         const defaultPreference = {
           audio: true,
-          screen: false,
           video: false,
         };
         const userref = push(membersref, { userName, defaultPreference });

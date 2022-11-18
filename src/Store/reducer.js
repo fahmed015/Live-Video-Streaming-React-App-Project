@@ -11,7 +11,7 @@ import {
   RESET,
 } from "./actiontypes";
 
-import { createOffer, Listensers } from "../FirebaseServer/firebase";
+import { Listensers, addConnection } from "../Server/Webtrc";
 
 function generateLightColorHex() {
   let color = "#";
@@ -21,22 +21,6 @@ function generateLightColorHex() {
     ).slice(-2);
   return color;
 }
-
-const servers = {
-  iceServers: [
-    {
-      urls: [
-        "stun:stun1.l.google.com:19302",
-        "stun:stun2.l.google.com:19302",
-        "stun:stun.l.google.com:19302",
-        "stun:stun3.l.google.com:19302",
-        "stun:stun4.l.google.com:19302",
-        "stun:stun.services.mozilla.com",
-      ],
-    },
-  ],
-  iceCandidatePoolSize: 10,
-};
 
 let intialstate = {
   name: null,
@@ -72,8 +56,7 @@ export const userReducer = (state = intialstate, action) => {
 
     case SET_MAIN_STREAM: {
       state = { ...state, ...action.payload };
-      console.log("Mediastream");
-      console.log(state);
+
       return state;
     }
 
@@ -154,23 +137,4 @@ export const userReducer = (state = intialstate, action) => {
       return state;
     }
   }
-};
-
-export const addConnection = (currentuser, newuser, mediastream) => {
-  const peerconnection = new RTCPeerConnection(servers);
-
-  mediastream.getTracks().forEach((track) => {
-    peerconnection.addTrack(track, mediastream);
-  });
-
-  const userid = Object.keys(currentuser)[0];
-  const memberid = Object.keys(newuser)[0];
-
-  const offerIds = [memberid, userid].sort((a, b) => a.localeCompare(b));
-
-  newuser[memberid].peerConnection = peerconnection;
-
-  if (offerIds[0] !== userid)
-    createOffer(peerconnection, offerIds[0], offerIds[1]);
-  return newuser;
 };
